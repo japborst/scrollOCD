@@ -1,11 +1,32 @@
 #scrollOCD
-This is a fork of [windows](http://nick-jonas.github.io/windows/) by Nick Jonas. Unfortunately, it is not available on GitHub anymore.
+Pure JavaScript-based (no jQuery or whatsoever) that causes an automatic scroll to the designed position. To see it in action, see the [demo](http://japborst.github.io/scrollOCD).
 
-#Adjustments
-**v0.1**: To fit the needs of the OCD scroller, the script's been adjusted to only scroll to the element that is in a 200px range of the current window offset. Additionally, it's been modified in a way that it takes the footer into account as well so that when one's exploring the footer's content (perhaps a `nav`), it doesn't scroll away from it. For mobile devices it wasn't suited in my use case,
-therefore it only triggers if the screensize is larger than 1280px.
+#Changelog
+**v1.0**: First final version.
 
-Currently you have to modify [line 129](https://github.com/japborst/scrollOCD/blob/master/windows.js#L129) to fit your needs.
+#Usage
+Include the script just before the `body` tag. 
 
-#Notes
-Currently requires jQuery. My goal is to make a completely new version that solely relies on pure JavaScript and that all settings are easily customizable.
+	<script src="scrollOCD.min.js"></script>
+
+If you'd like to customize it, you may include the following afterwards and use what is needed - hence, only set the parameters you need. These are the default options:
+
+	<script>
+		scrollOCDinit({
+			'classname': 	'ocd',
+			'diff': 		200,
+			'timeout': 		1500,
+			'minWidth': 	1280,
+			'resize': 		true
+		});
+	</script>
+
+`classname` is the class that is applied on the element that the script needs to scroll to, in this case `.ocd`
+
+`diff` is the maximum difference between the current scroll position and the closest element that has the class of `classname`. In this case: `200px`. Note: It is meant only for small adjustments, therefore large values are not recommended.
+
+`timeout` is the amount of `ms` it will wait after the user stops scrolling to trigger the scroll. Here: `1500ms`.
+
+`minWidth` can be set to a value, in this case `1280px`, or `false` to disable its functionality. Basically, this is the minimum `viewport-width` of the browser for the script to be triggered as in many cases you'll only want this on larger screens.
+
+`resize`: either `true` or `false` whether it should be triggered after a `viewport` resize.
