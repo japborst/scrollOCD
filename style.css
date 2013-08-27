@@ -11,14 +11,14 @@ body{
 h1{
 	font-size: 3em;
 	line-height: 1em;
-	font-weight: normal;
+	font-weight: 300;
 	color: inherit;
 	margin: 0.4em 0;
 }
 h2{
 	font-size: 2em;
 	line-height: 1em;
-	font-weight: normal;
+	font-weight: 300;
 	text-align: center;
 	color: rgba(0,0,0,0.8);
 }
