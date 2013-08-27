@@ -23,7 +23,7 @@ If you'd like to customize it, you may include the following afterwards and use 
 
 `classname` is the class that is applied on the element that the script needs to scroll to, in this case `.ocd`
 
-`diff` is the maximum difference between the current scroll position and the closest element that has the class of `classname`. In this case: `200px`. Note: It is meant only for small adjustments, therefore large values are not recommended.
+`diff`, in `px` or `%`, is the maximum difference between the current scroll position and the closest element that has the class of `classname`. In this case: `200px`. Values in percentages are a fraction of the window height and written as `'diff': '10%'`. Note: It is meant only for small adjustments, therefore large values are not recommended.
 
 `timeout` is the amount of `ms` it will wait after the user stops scrolling to trigger the scroll. Here: `1500ms`.
 

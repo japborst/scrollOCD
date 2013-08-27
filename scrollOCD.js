@@ -2,16 +2,19 @@ var options;
 function scrollOCDinit(args) {
 	options = args
 		defaults = {
-	  	'classname': 'ocd',
+	  	'classname': 	'ocd',
 	  	'diff': 			200,
 	  	'timeout': 		1500,
 	  	'minWidth': 	1280,
-	  	'resize': 		true
+	  	'resize': 		false
 	  }
 		for(var i in defaults) {
 			if(typeof options[i] === "undefined") {
 				options[i] = defaults[i];
 			}
+		}
+		if(String(options.diff).indexOf('%') > -1){
+			options.diff = window.innerHeight*parseInt(options.diff)/100;
 		}
 }
 function smoothScroll(elemTop) {
