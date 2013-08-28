@@ -1,28 +1,26 @@
-var options;
-function scrollOCDinit(args) {
-	options = args
-		defaults = {
-	  	'classname': 	'ocd',
-	  	'diff': 			200,
-	  	'timeout': 		1500,
-	  	'minWidth': 	1280,
-	  	'resize': 		false
-	  }
-		for(var i in defaults) {
-			if(typeof options[i] === "undefined") {
-				options[i] = defaults[i];
-			}
-		}
-		if(String(options.diff).indexOf('%') > -1){
-			options.diff = window.innerHeight*parseInt(options.diff)/100;
-		}
+var options = scrollOCDconfig;
+defaults = {
+	'classname':  'ocd',
+	'diff':       200,
+	'speed':      1,
+	'timeout':    1500,
+	'minWidth':   1280
 }
-function smoothScroll(elemTop) {
+for(var i in defaults) {
+	if(typeof options[i] === "undefined") {
+		options[i] = defaults[i];
+	}
+}
+if(String(options.diff).indexOf('%') > -1){
+	options.diff = window.innerHeight*parseInt(options.diff)/100;
+}
+
+function smoothScroll(elemTop,speedInt) {
 		var start, stop, distance, speed, step, leap, timer
     start = window.pageYOffset;
     stop = elemTop;
     distance = stop > start ? -start + stop : start - stop;
-    speed = Math.round(distance / 100);
+    speed = Math.round(distance / (speedInt*40));
     if (speed >= 20) speed = 20;
     step = Math.round(distance / 50);
     leap = stop > start ? start + step : start - step;
@@ -45,26 +43,38 @@ function scrollOCD(options) {
 	for (var i = ocd.length - 1; i >= 0; i--) {
 		elemTop = ocd[i].offsetTop;
 		if(Math.abs(scrollPos - elemTop) <= options.diff){
-			smoothScroll(elemTop);
+			smoothScroll(elemTop,options.speed);
 		}
 	}
 }
 function scrollOCDexec(options){
-	if(!options.minWidth || window.innerWidth >= options.minWidth){
-		window.clearTimeout(scrollInt);
-		scrollInt = window.setTimeout(function(){
-			scrollOCD(options);
-		},options.timeout);
-	}
+	window.clearTimeout(scrollInt);
+	scrollInt = window.setTimeout(function(){
+		scrollOCD(options);
+	},options.timeout);
 }
 
-scrollOCDinit({});
-var scrollInt = null;
-window.onscroll = function() {
-	scrollOCDexec(options);
+var scrollEvent = 'mousewheel';
+function isTouch() {
+  return !!('ontouchstart' in window);
 }
-if(options.resize){
-	window.onresize = function() {
+var isFireFox = (navigator.userAgent.indexOf('Firefox') != -1);
+if(isFireFox){
+	scrollEvent = 'DOMMouseScroll';
+}
+if(isTouch()){
+	scrollEvent = 'touchmove';
+}
+
+var scrollInt = null;
+if(!options.minWidth || window.innerWidth >= options.minWidth){
+	document.addEventListener(scrollEvent,function(){
 		scrollOCDexec(options);
-	}
+	},false);
+
+	document.addEventListener('keydown',function(e){
+		if(e.keyCode == 38 || e.keyCode == 40){
+			scrollOCDexec(options);
+		}
+	},false)
 }
