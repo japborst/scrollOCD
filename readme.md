@@ -11,11 +11,11 @@ If you'd like to customize it, you may include the following **before** and use 
 
 	<script>
 		var scrollOCDconfig = {
-			'classname': 	'ocd',
-			'diff': 			200,
-			'speed': 			1,
-			'timeout': 		1500,
-			'minWidth': 	1280
+			'classname':  'ocd',
+			'diff':       200,
+			'speed':      1,
+			'timeout':    1500,
+			'minWidth':   1280
 		};
 	</script>
 	<script src="scrollOCD.min.js"></script>
