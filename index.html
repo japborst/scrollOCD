@@ -34,15 +34,15 @@
 		<span class="round">5</span>
 		<h2><a href="https://github.com/japborst/scrollOCD">Available on GitHub</a></h2>
 	</div>
-	<script src="scrollOCD.min.js"></script>
 	<script>
-		scrollOCDinit({
+		var scrollOCDconfig = {
 			'classname': 	'ocd',
 			'diff': 			'25%',
+			'speed': 			1,
 			'timeout': 		1500,
-			'minWidth': 	1280,
-			'resize': 		false
-		});
+			'minWidth': 	false
+		};
 	</script>
+	<script src="scrollOCD.js"></script>
 </body>
 </html>
