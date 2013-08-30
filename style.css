@@ -68,6 +68,14 @@ a{
 	background: crimson;
 	top: 400%;
 }
+footer{
+	position: absolute;
+	top: 500%;
+	width: 100%;
+	padding: 2em 0;
+	font-size: 1.5em;
+	text-align: center;
+}
 
 /* Just some media queries */
 
