@@ -2,6 +2,7 @@
 Pure JavaScript-based (no jQuery or whatsoever) that causes an automatic scroll to the designed position. To see it in action, see the [demo](http://japborst.github.io/scrollOCD).
 
 #Changelog
+**v1.1**: Includes support for excluded elements, percentage-based difference and performance improvements.
 **v1.0**: First final version.
 
 #Usage
@@ -15,7 +16,8 @@ If you'd like to customize it, you may include the following **before** and use 
 			'diff':       200,
 			'speed':      1,
 			'timeout':    1500,
-			'minWidth':   1280
+			'minWidth':   1280,
+			'exclude':    ''
 		};
 	</script>
 	<script src="scrollOCD.min.js"></script>
@@ -29,6 +31,8 @@ If you'd like to customize it, you may include the following **before** and use 
 `timeout`: the amount of `ms` it will wait after the user stops scrolling to trigger the scroll. Here: `1500ms`.
 
 `minWidth`: a value, in this case `1280px`, or `false` to disable its functionality. Basically, this is the minimum `viewport-width` of the browser for the script to be triggered as in many cases you'll only want this on larger screens.
+
+`exclude` is a comma-seperated list of elements (classes, id's and tags) that needs to be excluded i.e. when visible it won't snap to an element. Example: `'.excludeMe,#meToo,footer'`.
 
 #Compatibility
 Works in all modern browsers. IE<9 will not work, unfortunately.
