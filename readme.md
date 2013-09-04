@@ -1,6 +1,9 @@
 #scrollOCD
 Pure JavaScript-based (no jQuery or whatsoever) that causes an automatic scroll to the designed position. To see it in action, see the [demo](http://japborst.github.io/scrollOCD).
 
+##In the wild
+[Pluskids](http://pluskids.nl)
+
 #Changelog
 **v1.1**: Includes support for excluded elements, percentage-based difference and performance improvements.
 **v1.0**: First final version.
