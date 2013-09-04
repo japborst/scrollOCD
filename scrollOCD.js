@@ -1,4 +1,4 @@
-var options = scrollOCDconfig;
+var options = (typeof scrollOCDconfig !== "undefined" ) ? scrollOCDconfig : {};
 defaults = {
 	'classname':  'ocd',
 	'diff':       200,
