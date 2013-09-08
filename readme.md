@@ -5,25 +5,24 @@ Pure JavaScript-based (no jQuery or whatsoever) that causes an automatic scroll 
 [Pluskids](http://pluskids.nl)
 
 #Changelog
+**v1.2**: Performance and JS improvements
 **v1.1**: Includes support for excluded elements, percentage-based difference and performance improvements.
 **v1.0**: First final version.
 
 #Usage
-Include the script just before the `body` tag. 
+Include the script just before the closing `</body>` tag and initialise it. The function accepts one argument, being the settings. Set only the ones you need; below are the defaults:
 
-If you'd like to customize it, you may include the following **before** and use what is needed - hence, only set the parameters you need. These are the default options:
-
+	<script src="scrollOCD.min.js"></script>
 	<script>
-		var scrollOCDconfig = {
+		var scrollOCDinstance = new scrollOCD({
 			'classname':  'ocd',
 			'diff':       200,
 			'speed':      1,
 			'timeout':    1500,
 			'minWidth':   1280,
 			'exclude':    ''
-		};
+		});
 	</script>
-	<script src="scrollOCD.min.js"></script>
 
 `classname` is the class that is applied on the element that the script needs to scroll to, in this case `.ocd`
 
