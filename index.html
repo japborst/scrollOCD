@@ -27,7 +27,7 @@
 	<div class="ocd">
 		<h1>Customizable</h1>
 		<span class="round">4</span>
-		<h2>Timeouts and differences easily set</h2>
+		<h2>Timeouts, differences and exclusions are easily set</h2>
 	</div>
 	<div class="ocd">
 		<h1>Download</h1>
@@ -37,16 +37,13 @@
 	<footer>
 		Made by <a href="http://japborst.net">Jelmer Borst</a>
 	</footer>
+	<script src="scrollOCD.min.js"></script>
 	<script>
-		var scrollOCDconfig = {
-			'classname': 	'ocd',
+		var scrollOCDinstance = new scrollOCD({
 			'diff': 			'25%',
-			'speed': 			1,
-			'timeout': 		1500,
 			'minWidth': 	false,
 			'exclude':    'footer'
-		};
+		});
 	</script>
-	<script src="scrollOCD.min.js"></script>
 </body>
 </html>
