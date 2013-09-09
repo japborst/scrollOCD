@@ -1,5 +1,6 @@
 function scrollOCD (settings) {
 		"use strict";
+		settings = (typeof settings !== "undefined" ) ? settings : {};
 		var defaults = {
 			'classname':  'ocd',
 			'diff':       200,
@@ -18,37 +19,25 @@ function scrollOCD (settings) {
 		}
 
 		function smoothScroll(elemTop,speedInt) {
+			clearInterval(smoothInt);
 			var start = window.pageYOffset,
 					stop = elemTop,
-					distance = stop > start ? -start + stop : start - stop,
-					speed = Math.round(distance / (speedInt*40)),
-					step = Math.round(distance / 50),
-					leap = stop > start ? start + step : start - step,
-					timer = 0;
-			if (stop > start) {
-				for (var i = start; i < stop; i += step) {
-					setTimeout("window.scrollTo(0, "+leap+")", timer * speed);
-					leap = (leap > stop) ? stop : leap + step;
-					timer++;
-				} return;
-			}
-			else{
-				for (var j = start; j > stop; j -= step) {
-					setTimeout("window.scrollTo(0, "+leap+")", timer * speed);
-					leap = (leap < stop) ? stop : leap - step; timer++;
-				}
+					distance = stop - start,
+					step = Math.round(distance / 20 * speedInt);
+			smoothInt = setInterval(function(){
+				scrollWindow(step,stop);
+			},10);
+		}
+
+		function scrollWindow(incr,dest) {
+			var yPos = window.pageYOffset;
+			window.scrollTo(0,yPos + incr);
+			if((incr > 0 && yPos + incr >= dest) || (incr < 0 && yPos + incr <= dest)){
+				window.scrollTo(0,dest);
+				clearInterval(smoothInt);
 			}
 		}
-		function init(settings) {
-			var ocd = document.getElementsByClassName(settings.classname),
-					scrollPos = window.pageYOffset;
-			for (var i = ocd.length - 1; i >= 0; i -= 1) {
-				var elemTop = ocd[i].offsetTop;
-				if(Math.abs(scrollPos - elemTop) <= settings.diff){
-					smoothScroll(elemTop,settings.speed);
-				}
-			}
-		}
+
 		function excludeElem(elem){
 			if(typeof elem[0] === "undefined"){
 				return false;
@@ -96,7 +85,14 @@ function scrollOCD (settings) {
 			window.clearTimeout(scrollInt);
 			scrollInt = window.setTimeout(function(){
 				if(!excludeElem(settings.exclude)){
-					init(settings);
+					var ocd = document.getElementsByClassName(settings.classname),
+							scrollPos = window.pageYOffset;
+					for (var i = ocd.length - 1; i >= 0; i -= 1) {
+						var elemTop = ocd[i].offsetTop;
+						if(Math.abs(scrollPos - elemTop) <= settings.diff){
+							smoothScroll(elemTop,settings.speed);
+						}
+					}
 				}
 			},settings.timeout);
 		}
@@ -110,7 +106,8 @@ function scrollOCD (settings) {
 			scrollEvent = 'touchmove';
 		}
 
-		var scrollInt = null;
+		var scrollInt = null,
+				smoothInt = null;
 		if(!settings.minWidth || window.innerWidth >= settings.minWidth){
 			document.addEventListener(scrollEvent,function(){
 				execute(settings);
